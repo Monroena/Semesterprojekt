@@ -9,23 +9,26 @@ function hentAftaleFecth(from, to) {
 }
 
 function udfyldskema(data) {
-    let time = "";
-    let name = "";
+    let timestart = "";
+    let timeend ="";
+    let klinikId = "";
     let cpr = "";
     let container = "";
     let note = "";
 
-    for (let i = 0; i < data.length; i++) {
-        time = data[i].timestart.substring(11, 16);
-        name = (data[i].name + " ");
-        cpr = "CPR: " + data[i].cpr;
-        note = "Notat: " + data[i].note;
+    for (let i = 0; i < data.aftaleliste.length; i++) {
+        timestart = data.aftaleliste[i].TimeStart.substring(11, 16)+"\t-\t";
+        timeend = data.aftaleliste[i].TimeEnd.substring(11, 16)
+        klinikId = ("klinikId: "+data.aftaleliste[i].KlinikID);
+        cpr = "CPR: " + data.aftaleliste[i].CPR+"\t";
+        note = "Notat: " + data.aftaleliste[i].Notat;
 
-        let tider = '<span class="autotider">' + time + '</span>'
-        let navne = '<span class="autoname">' + name + cpr + '</span>';
-        let notat = '<span class="autonote">' + note + '</span><hr>';
 
-        container += tider + navne + notat;
+        let Tider = '<span class="autotider">' + timestart + timeend + '</span>';
+        let CPR = '<span class="autoname">' + cpr + klinikId + '</span>';
+        let Notat = '<span class="autonote">' + note + '</span><hr>';
+
+        container += Tider + CPR + Notat;
     }
 
     document.getElementById("autotider").innerHTML = container;
@@ -125,7 +128,7 @@ function setdates(year, month, day) {
 function formfetch() {
     fetch("http://localhost:8080/IT3_Delopgave_2_war/data/aftaler/aftalerSQL?" + new URLSearchParams({
         cpr: document.getElementById("cpr").value,
-        name: document.getElementById("navn").value,
+        //name: document.getElementById("navn").value,
         timestart: document.getElementById("timeStart").value,
         timeend: document.getElementById("timeEnd").value,
         note: document.getElementById("textarea").value
@@ -157,7 +160,7 @@ function submitForm() {
 
 function resetForm() {
     document.getElementById("cpr").value = "";
-    document.getElementById("navn").value = "";
+    //document.getElementById("navn").value = "";
     document.getElementById("timeStart").value = "";
     document.getElementById("timeEnd").value = "";
     document.getElementById("timefree").value = "";

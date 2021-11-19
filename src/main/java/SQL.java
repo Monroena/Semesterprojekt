@@ -7,20 +7,18 @@ public class SQL {
     private SQL() {
     }
 
-    static private final SQL sqlOBJ = new SQL();
+    static private final SQL SQLOBJ = new SQL();
 
     static public SQL getSqlOBJ() {
-        return sqlOBJ;
+        return SQLOBJ;
     }
 
-    private final String url = "jdbc:mysql://130.225.170.176:3306/listedb";
+    private final String url = "jdbc:mysql://130.225.170.176:3306/listedb2";
     private final String DatabaseUser = "test2";
     private final String DatabasePassword = "faxe2021";
 
     private Connection myConn;
     public Statement myStatement;
-
-    private List<OGAftale> OGAftaleList;
 
     public void makeConnectionSQL() throws SQLException {
         try {
@@ -42,73 +40,75 @@ public class SQL {
         }
     }
 
-    public List<OGAftale> getAftaleListeDateTime(String fra, String til) throws SQLException {
+    public AftaleListe getAftaleListeDateTime(String fra, String til) throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
-        OGAftaleList = new ArrayList<>();
+        AftaleListe aftaleListe = new AftaleListe();
         try {
-            PreparedStatement pp = myConn.prepareStatement("SELECT * FROM patients WHERE startTime BETWEEN ? and ?;");
-            pp.setString(1,fra);
-            pp.setString(2,til);
+            PreparedStatement pp = myConn.prepareStatement("SELECT * FROM listedb2.aftaler WHERE TimeStart BETWEEN ? and ?;");
+            pp.setString(1, fra);
+            pp.setString(2, til);
 
             ResultSet rs = pp.executeQuery();
 
             while (rs.next()) {
-                OGAftale p = new OGAftale();
-                p.setCpr(String.valueOf(rs.getInt(1)));
-                p.setName(rs.getString(2));
-                p.setTimestart(rs.getString(3));
-                p.setTimeend(rs.getString(4));
-                p.setNote(rs.getString(5));
+                Aftale aftale = new Aftale();
+                aftale.setCPR(String.valueOf(rs.getInt(1)));
+                aftale.setTimeStart(rs.getString(2));
+                aftale.setTimeEnd(rs.getString(3));
+                aftale.setNotat(rs.getString(4));
+                aftale.setID(rs.getString(5));
+                aftale.setKlinikID(rs.getString(6));
 
-                OGAftaleList.add(p);
+
+                aftaleListe.addAftaler(aftale);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         SQL.getSqlOBJ().removeConnectionSQL();
 
-        return OGAftaleList;
+        return aftaleListe;
     }
 
-    public void insertAftaleSQL(OGAftale p) throws OurException {
-
+    public void insertAftaleSQL(Aftale aftale) throws OurException {
 
         try {
             makeConnectionSQL();
-            PreparedStatement pp = myConn.prepareStatement("INSERT INTO patients(cpr, navn, startTime, endTime, note) values(?,?,?,?,?);");
+            PreparedStatement pp = myConn.prepareStatement("INSERT INTO listedb2.aftaler (CPR, TimeStart, TimeEnd, Notat, KlinikId) values(?,?,?,?,?);");
 
-            pp.setString(1, p.getCpr());//CPR
-            pp.setString(2, p.getName());//navn
-            pp.setString(3, p.getTimestart());   //starttime
-            pp.setString(4, p.getTimeend());   //endtime
-            pp.setString(5, p.getNote());  //not
+            pp.setString(1, aftale.getCPR());  //CPR
+            pp.setString(2, aftale.getTimeStart());  //starttime
+            pp.setString(3, aftale.getTimeEnd());  //endtime
+            pp.setString(4, aftale.getNotat());  //note
+            pp.setString(5, aftale.getKlinikID()); //klinikif
 
             pp.execute();
 
             removeConnectionSQL();
-        } catch (SQLException e) {
+        } catch (SQLException throwables) {
             OurException ex = new OurException();
-            ex.setMessage("Den tid er allerede optaget");
+            ex.setMessage("Tiden er allerede optaget.");
             throw ex;
         }
     }
 
-    public List<OGAftale> getAftalerListe() throws SQLException {
+    public AftaleListe getAftalerListe() throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
-        OGAftaleList = new ArrayList<>();
-        String query = "SELECT * FROM patients";
+        AftaleListe aftaleListe = new AftaleListe();
+        String query = "SELECT * FROM aftaler";
         try {
             ResultSet rs = SQL.getSqlOBJ().myStatement.executeQuery(query);
 
             while (rs.next()) {
-                OGAftale p = new OGAftale();
-                p.setCpr(String.valueOf(rs.getInt(1)));
-                p.setName(rs.getString(2));
-                p.setTimestart(rs.getString(3));
-                p.setTimeend(rs.getString(4));
-                p.setNote(rs.getString(5));
+                Aftale aftale = new Aftale();
+                aftale.setCPR(String.valueOf(rs.getInt(1)));
+                aftale.setTimeStart(rs.getString(2));
+                aftale.setTimeEnd(rs.getString(3));
+                aftale.setNotat(rs.getString(4));
+                aftale.setID(rs.getString(5));
+                aftale.setKlinikID(rs.getString(6));
 
-                OGAftaleList.add(p);
+                aftaleListe.addAftaler(aftale);
             }
 
         } catch (SQLException e) {
@@ -116,13 +116,13 @@ public class SQL {
         }
         SQL.getSqlOBJ().removeConnectionSQL();
 
-        return OGAftaleList;
+        return aftaleListe;
     }
 
     public String hentBrugerListe(String s) throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
-        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM listedb.LoginOplysninger WHERE USERNAME = ?;");
-        pp.setString(1,s);
+        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM listedb2.LoginOplysninger WHERE USERNAME = ?;");
+        pp.setString(1, s);
         String svar = "";
         try {
             ResultSet rs = pp.executeQuery();
@@ -135,6 +135,33 @@ public class SQL {
         }
         SQL.getSqlOBJ().removeConnectionSQL();
         return svar;
+    }
+
+    public AftaleListe cprSearch(String cpr) throws SQLException {
+        SQL.getSqlOBJ().makeConnectionSQL();
+        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM liste.db2aftaler WHERE CPR = ?;");
+        AftaleListe aftaleListe = new AftaleListe();
+        try {
+            pp.setString(1, cpr);
+            ResultSet rs = pp.executeQuery();
+
+            while (rs.next()) {
+                Aftale aftale = new Aftale();
+                aftale.setCPR(String.valueOf(rs.getInt(1)));
+                aftale.setTimeStart(rs.getString(2));
+                aftale.setTimeEnd(rs.getString(3));
+                aftale.setNotat(rs.getString(4));
+                aftale.setID(rs.getString(5));
+                aftale.setKlinikID(rs.getString(6));
+
+                aftaleListe.addAftaler(aftale);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        SQL.getSqlOBJ().removeConnectionSQL();
+        System.out.println(aftaleListe.getAftaler());
+        return aftaleListe;
     }
 }
 

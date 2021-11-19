@@ -1,12 +1,14 @@
+import java.sql.SQLException;
+
 public class AftaleController {
 
     private AftaleController() {
     }
 
-    static private final AftaleController AftaleControllerOBJ = new AftaleController();
+    static private final AftaleController AFTALE_CONTROLLER_OBJ = new AftaleController();
 
     static public AftaleController getAftaleControllerOBJ() {
-        return AftaleControllerOBJ;
+        return AFTALE_CONTROLLER_OBJ;
     }
 
     // bolsk værdi til kontrol af cpr'er
@@ -19,39 +21,33 @@ public class AftaleController {
         }
     }
 
-    public boolean navnCheck(String s){
-        for (int i=0;i<s.length();i++){
-            char c = s.charAt(i);
-            if (Character.isDigit(c)){
-                return false;
-            }
+    public AftaleListe cprSearch(String cpr) throws SQLException, OurException {
+        if (cpr == null) {
+            return SQL.getSqlOBJ().getAftalerListe();
         }
-        return true;
+        if (cprCheck(cpr)) {
+            return SQL.getSqlOBJ().cprSearch(cpr);
+        }
+       return new AftaleListe();
     }
 
-    public String createAftale(String cpr, String name, String timestart, String timeend, String note) throws OurException {
-        OGAftale OGAftale = new OGAftale();
-        if (cprCheck(cpr)) {
-            if (navnCheck(name)) {
-                if (note.length() < 255) {
-                    OGAftale.setCpr(cpr);
-                    OGAftale.setName(name);
-                    OGAftale.setTimestart(timestart);
-                    OGAftale.setTimeend(timeend);
-                    OGAftale.setNote(note);
 
-                    SQL.getSqlOBJ().insertAftaleSQL(OGAftale);
-                    return "added patient" + OGAftale;
-                } else {
-                    //forkert note
-                    OurException ex = new OurException();
-                    ex.setMessage("For lang note, skal være under 255 tegn.");
-                    throw ex;
-                }
+    public String createAftale(String cpr, String timestart, String timeend, String note) throws OurException {
+        Aftale aftale = new Aftale();
+        if (cprCheck(cpr)) {
+            if (note.length() < 255) {
+                aftale.setCPR(cpr);
+                aftale.setTimeStart(timestart);
+                aftale.setTimeEnd(timeend);
+                aftale.setNotat(note);
+                aftale.setKlinikID("4");
+
+                SQL.getSqlOBJ().insertAftaleSQL(aftale);
+                return "added patient" + aftale;
             } else {
-            //forkert navn
+                //forkert note
                 OurException ex = new OurException();
-                ex.setMessage("Ugyldigt navn");
+                ex.setMessage("For lang note, skal være under 255 tegn.");
                 throw ex;
             }
         } else {

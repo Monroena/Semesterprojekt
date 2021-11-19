@@ -11,16 +11,16 @@ import java.util.List;
 public class AftaleService {
 
     @GET
-    public List<OGAftale> getPatient() throws SQLException {
-        return SQL.getSqlOBJ().getAftalerListe();
+    public List<Aftale> getPatient(@QueryParam("cpr") String cpr) throws SQLException, OurException {
+        return AftaleController.getAftaleControllerOBJ().cprSearch(cpr).getAftaler();
     }
 
     @Path("aftalerSQL")
     @POST
     @Produces(MediaType.TEXT_PLAIN)
-    public String makepatientSQL(@QueryParam("cpr") String cpr, @QueryParam("name") String name, @QueryParam("timestart")
+    public String makepatientSQL(@QueryParam("cpr") String cpr, @QueryParam("timestart")
             String timestart, @QueryParam("timeend") String timeend, @QueryParam("note") String notat) throws SQLException, OurException {
-        return AftaleController.getAftaleControllerOBJ().createAftale(cpr, name, timestart, timeend, notat);
+        return AftaleController.getAftaleControllerOBJ().createAftale(cpr, timestart, timeend, notat);
     }
 
     @Path("aftalerSQL")

@@ -25,17 +25,19 @@ function fetchfunction(apiurl) {fetch(apiurl).
 
 function displaydata(data) {
     let container="";
-    for (let i=0 ; i < data.length ; i++) {
-        let namecpr = data[i].name+"   ---"+data[i].cpr;
-        let time = data[i].timestart+" : "+data[i].timeend;
-        let note = data[i].note;
-
+    for (let i=0 ; i < data.aftaleliste.length ; i++) {
+        let cpr = "CPR: "+data.aftaleliste[i].CPR;
+        let klinikid = "KlinikID: "+ data.aftaleliste[i].KlinikID;
+        let id = "AftaleID: "+data.aftaleliste[i].ID;
+        let time = data.aftaleliste[i].TimeStart+" ----- " +data.aftaleliste[i].TimeEnd;
+        let note = data.aftaleliste[i].Notat;
 
         let tider = '<span class="tider">' + time + '</span><br>'
-        let navne = '<span class="name">' + namecpr + '</span><br>';
+        let navne = '<span class="name">' + cpr+" --- "+klinikid+" --- "+id+'</span><br>';
         let notat = '<span class="note">' + note + '</span><hr>';
 
         container += navne + tider + notat;
+        console.log(container);
     }
         document.getElementById("tekstfelt").innerHTML=container;
 }
