@@ -18,7 +18,7 @@ function togglevisibiliy() {
 let user = "";
 let pass = "";
 
-function fetchrs() {
+function login() {
     user = document.getElementById("username").value;
     pass = document.getElementById("password").value;
     fetch("http://localhost:8080/IT3_Delopgave_2_war/data/login?" + new URLSearchParams({
@@ -32,6 +32,9 @@ function fetchrs() {
             throw Error(await resp.text());
         }
     }).then(data => validate(data)).catch(Error =>alert(Error));
+
+    // der skal laves ny login fetch og metode
+
 }
 
 function validate(i) {

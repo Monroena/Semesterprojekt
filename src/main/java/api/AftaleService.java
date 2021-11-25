@@ -1,4 +1,10 @@
+package api;
+
 import com.google.gson.Gson;
+import controller.AftaleController;
+import dataAccesLayer.SQL;
+import exceptions.OurException;
+import model.Aftale;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

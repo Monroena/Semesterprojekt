@@ -1,3 +1,5 @@
+package model;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -15,7 +17,7 @@ public class Aftale {
 
     @Override
     public String toString() {
-        return "Aftale{" +
+        return "model.Aftale{" +
                 "CPR='" + CPR + '\'' +
                 ", ID='" + ID + '\'' +
                 ", KlinikID='" + KlinikID + '\'' +

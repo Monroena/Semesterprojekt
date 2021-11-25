@@ -1,3 +1,12 @@
+package controller;
+
+
+import dataAccesLayer.SQL;
+import exceptions.OurException;
+import model.Aftale;
+import model.AftaleListe;
+
+
 import java.sql.SQLException;
 
 public class AftaleController {
@@ -21,7 +30,7 @@ public class AftaleController {
         }
     }
 
-    public AftaleListe cprSearch(String cpr) throws SQLException, OurException {
+    public model.AftaleListe cprSearch(String cpr) throws SQLException, OurException {
         if (cpr == null) {
             return SQL.getSqlOBJ().getAftalerListe();
         }

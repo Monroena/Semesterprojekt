@@ -1,3 +1,9 @@
+package controller;
+
+import dataAccesLayer.SQL;
+import exceptions.OurException;
+import model.LoginData;
+
 import java.sql.SQLException;
 
 public class LoginController {
@@ -27,6 +33,10 @@ public class LoginController {
             }
             return 0;
         }
+    }
+
+    public String doLogin(LoginData loginData) {
+        return loginData.getPassword();
     }
 }
 

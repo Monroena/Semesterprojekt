@@ -1,6 +1,9 @@
+package dataAccesLayer;
+
+import exceptions.OurException;
+import model.Aftale;
+import model.AftaleListe;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SQL {
 
