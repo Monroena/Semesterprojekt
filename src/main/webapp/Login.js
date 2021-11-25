@@ -33,15 +33,4 @@ function login() {
         }
     }).then(data => validate(data)).catch(Error =>alert(Error));
 
-    // der skal laves ny login fetch og metode
-
-}
-
-function validate(i) {
-    if (i == 1) {
-        sessionStorage.setItem("username", user);
-        window.location.replace("StartSide.html");
-    } else {
-        alert("Forkert password");
-    }
-}
+}*/

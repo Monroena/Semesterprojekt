@@ -1,9 +1,12 @@
 package controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
 import model.LoginData;
+import model.User;
 
+import javax.ws.rs.WebApplicationException;
 import java.sql.SQLException;
 
 public class LoginController {
@@ -17,26 +20,30 @@ public class LoginController {
         return loginControllerOBJ;
     }
 
-    public int loginVal(String user, String pass) throws SQLException, OurException {
-        if (user.equals("") || pass.equals("")) {
-            OurException ex = new OurException();
-            ex.setMessage("Brugernavn eller Password mangler");
-            throw ex;
-            //throw new WebApplicationException("Brugernavn eller Password mangler", Response.Status.BAD_REQUEST); //400
-        } else {
-            String s = SQL.getSqlOBJ().hentBrugerListe(user);
-            if (s.length() > 1) {
-                String[] opdelt = s.split("A");
-                if (opdelt[1].equals(pass)) {
-                    return 1;
-                }
+    public boolean loginVal(String brugerliste, String pass){
+        if (brugerliste.length() > 1) {
+            String[] opdelt = brugerliste.split("A");
+            if (opdelt[1].equals(pass)) {
+                return true;
             }
-            return 0;
         }
+        return false;
     }
 
     public String doLogin(LoginData loginData) {
-        return loginData.getPassword();
+        try {
+            // sql kald der kontrollere om brugeren eksitere
+            String brugerListe = SQL.getSqlOBJ().hentBrugerListe(loginData.getUsername());
+
+            // kontrol af login og generer token
+            if (loginVal(brugerListe, loginData.getPassword())) {
+                User user = new User(loginData);
+                return JWTHandler.generateJwtToken(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            throw new WebApplicationException("fejl", 401);
     }
 }
 

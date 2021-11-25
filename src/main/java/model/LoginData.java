@@ -4,6 +4,11 @@ public class LoginData {
     private String username;
     private String password;
 
+    public LoginData(String user, String pass) {
+        setUsername(user);
+        setPassword(pass);
+    }
+
     public String getUsername() {
         return username;
     }

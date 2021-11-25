@@ -11,6 +11,10 @@ public class User {
         setUsername(user);
     }
 
+    public User(LoginData loginData) {
+        setUsername(loginData.getUsername());
+    }
+
     public String getUsername() {
         return username;
     }

@@ -122,13 +122,13 @@ public class SQL {
         return aftaleListe;
     }
 
-    public String hentBrugerListe(String s) throws SQLException {
+    public String hentBrugerListe(String bruger) throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
-        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM listedb2.LoginOplysninger WHERE USERNAME = ?;");
-        pp.setString(1, s);
+        PreparedStatement preparedStatement = myConn.prepareStatement("SELECT * FROM listedb2.LoginOplysninger WHERE USERNAME = ?;");
+        preparedStatement.setString(1, bruger);
         String svar = "";
         try {
-            ResultSet rs = pp.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 svar = svar + rs.getString(1);
                 svar = svar + "A" + rs.getString(2);
