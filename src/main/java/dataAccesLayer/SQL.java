@@ -18,7 +18,7 @@ public class SQL {
 
     private final String url = "jdbc:mysql://130.225.170.176:3306/listedb2";
     private final String DatabaseUser = "test2";
-    private final String DatabasePassword = "faxe2021";
+    private final String DatabasePassword = System.getenv("dbpass"); //tomcat system startupsetting add password
 
     private Connection myConn;
     public Statement myStatement;
