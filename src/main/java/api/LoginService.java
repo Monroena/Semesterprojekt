@@ -18,11 +18,4 @@ public class LoginService {
         System.out.println("kontrol1"+ " " + user + " " + pass);
         return LoginController.getLoginControllerOBJ().doLogin(loginData);
     }
-    /*@POST
-    @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String doLogin(LoginData loginData){
-        return LoginController.getLoginControllerOBJ().doLogin(loginData);
-    }*/
-
 }

@@ -49,13 +49,13 @@ public class JWTHandler {
         String[] tokenArray = authentication.split(" ");
         String token = tokenArray[tokenArray.length - 1];
 
-        System.out.println(token);
+        System.out.println("token til at parse: " + token);
         try {
             Claims claims = Jwts.parser()
                     .setSigningKey(getKey())
                     .parseClaimsJws(token)
                     .getBody();
-            System.out.println("test2");
+            System.out.println("token succesfuldt parset");
             ObjectMapper mapper = new ObjectMapper();
             User user = mapper.convertValue(claims.get("user"), User.class);
             System.out.println(user);

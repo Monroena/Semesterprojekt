@@ -18,7 +18,8 @@ window.onclick = function (event) {
 }
 
 /* Fetch kald som skal resultere i at xml bliver hentet*/
-function fetchfunction(apiurl) {fetch(apiurl).
+function fetchfunction(apiurl) {
+    fetch(apiurl).
         then(resp => resp.json()).
                 then(data => displaydata(data));
 }

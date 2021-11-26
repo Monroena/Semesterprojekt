@@ -1,6 +1,5 @@
 package controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
 import model.LoginData;
@@ -24,11 +23,6 @@ public class LoginController {
         return loginControllerOBJ;
     }
 
-
-
-
-
-
     public String doLogin(LoginData loginData) {
         try {
             // sql kald der kontrollere om brugeren eksitere
@@ -48,7 +42,7 @@ public class LoginController {
 
     public boolean loginVal(String brugerliste, String pass){
         if (brugerliste.length() > 1) {
-            String[] opdelt = brugerliste.split("B");
+            String[] opdelt = brugerliste.split("\\|");
             int salt = Integer.parseInt(opdelt[2]);
             String hashcheck = generateHash(pass,salt);
             if (opdelt[1].equals(hashcheck)) {

@@ -4,8 +4,12 @@ function hentAftaleFecth(from, to) {
     fetch("/IT3_Delopgave_2_war/data/aftaler/aftalerSQL?" + new URLSearchParams({
         from: fra,
         to: til,
-    }))
-        .then(resp => resp.json()).then(data => udfyldskema(data))
+
+    }),{
+        headers: {
+            "Authorization": localStorage.getItem("token")
+        }
+    }).then(resp => resp.json()).then(data => udfyldskema(data))
 }
 
 function udfyldskema(data) {
@@ -134,6 +138,9 @@ function formfetch() {
         note: document.getElementById("textarea").value
     }), {
         method: "POST",
+        headers: {
+            "Authorization": localStorage.getItem("token")
+        }
     }).then(async resp => {
         if (resp.status >= 200 && resp.status <= 299) {
             await resp.text();

@@ -131,8 +131,8 @@ public class SQL {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 svar = svar + rs.getString(1);
-                svar = svar + "B" + rs.getString(2);
-                svar = svar + "B" + rs.getString(3);
+                svar = svar + "|" + rs.getString(2);
+                svar = svar + "|" + rs.getString(3);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
