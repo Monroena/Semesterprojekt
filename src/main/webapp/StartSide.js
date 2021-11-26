@@ -5,7 +5,7 @@ function hentAftaleFecth(from, to) {
         from: fra,
         to: til,
 
-    }),{
+    }), {
         headers: {
             "Authorization": localStorage.getItem("token")
         }
@@ -14,17 +14,17 @@ function hentAftaleFecth(from, to) {
 
 function udfyldskema(data) {
     let timestart = "";
-    let timeend ="";
+    let timeend = "";
     let klinikId = "";
     let cpr = "";
     let container = "";
     let note = "";
 
     for (let i = 0; i < data.aftaleliste.length; i++) {
-        timestart = data.aftaleliste[i].TimeStart.substring(11, 16)+"\t-\t";
+        timestart = data.aftaleliste[i].TimeStart.substring(11, 16) + "\t-\t";
         timeend = data.aftaleliste[i].TimeEnd.substring(11, 16)
-        klinikId = ("klinikId: "+data.aftaleliste[i].KlinikID);
-        cpr = "CPR: " + data.aftaleliste[i].CPR+"\t";
+        klinikId = ("klinikId: " + data.aftaleliste[i].KlinikID);
+        cpr = "CPR: " + data.aftaleliste[i].CPR + "\t";
         note = "Notat: " + data.aftaleliste[i].Notat;
 
 
@@ -85,7 +85,7 @@ function makecalender(date) {
     }
     for (let y = 1; y <= nextdays; y++) {
         days += `<div class="nextdates" onclick="nextdate();setdates(${year},${month + 1 === 13 ? 1 : month + 1},${y})">${y}</div>`;
-        
+
     }
     dates.innerHTML = days;
 }

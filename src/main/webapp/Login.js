@@ -45,6 +45,7 @@ async function login() {
     //Viderestil til den rigtige side!
     window.location.href = "StartSide.html"
 }
+
 /*
 function login() {
     user = document.getElementById("username").value;
