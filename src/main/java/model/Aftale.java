@@ -1,11 +1,11 @@
 package model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @jakarta.xml.bind.annotation.XmlRootElement
 public class Aftale {
-
 
 
     private String CPR;

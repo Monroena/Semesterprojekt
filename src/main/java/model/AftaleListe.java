@@ -1,16 +1,17 @@
 package model;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement
+@XmlRootElement(name="aftaleListe")
 @XmlSeeAlso(Aftale.class)
+@XmlAccessorType(XmlAccessType.FIELD)
 @jakarta.xml.bind.annotation.XmlRootElement
 @jakarta.xml.bind.annotation.XmlSeeAlso(Aftale.class)
 public class AftaleListe {
 
+    @XmlElement(name="Aftale")
     List<Aftale> aftaleliste = new ArrayList<>();
 
     public List<Aftale> getAftaler() {

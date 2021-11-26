@@ -4,12 +4,11 @@ import com.google.gson.Gson;
 import controller.AftaleController;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
-import model.Aftale;
+import model.AftaleListe;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
-import java.util.List;
 
 @Path("aftaler")
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -17,8 +16,8 @@ import java.util.List;
 public class AftaleService {
 
     @GET
-    public List<Aftale> getPatient(@QueryParam("cpr") String cpr) throws SQLException, OurException {
-        return AftaleController.getAftaleControllerOBJ().cprSearch(cpr).getAftaler();
+    public AftaleListe getPatient(@QueryParam("cpr") String cpr) throws SQLException, OurException {
+        return AftaleController.getAftaleControllerOBJ().cprSearch(cpr);
     }
 
     @Path("aftalerSQL")
