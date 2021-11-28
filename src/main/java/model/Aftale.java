@@ -3,27 +3,25 @@ package model;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-@jakarta.xml.bind.annotation.XmlRootElement
 public class Aftale {
 
 
     private String CPR;
     private String ID;
-    private String KlinikID;
-    private String TimeStart;
-    private String TimeEnd;
-    private String Notat;
+    private String klinikID;
+    private String timeStart;
+    private String timeEnd;
+    private String notat;
 
     @Override
     public String toString() {
         return "model.Aftale{" +
                 "CPR='" + CPR + '\'' +
                 ", ID='" + ID + '\'' +
-                ", KlinikID='" + KlinikID + '\'' +
-                ", TimeStart='" + TimeStart + '\'' +
-                ", TimeEnd='" + TimeEnd + '\'' +
-                ", Notat='" + Notat + '\'' +
+                ", KlinikID='" + klinikID + '\'' +
+                ", TimeStart='" + timeStart + '\'' +
+                ", TimeEnd='" + timeEnd + '\'' +
+                ", Notat='" + notat + '\'' +
                 '}';
     }
 
@@ -44,34 +42,34 @@ public class Aftale {
     }
 
     public String getKlinikID() {
-        return KlinikID;
+        return klinikID;
     }
 
     public void setKlinikID(String klinikID) {
-        KlinikID = klinikID;
+        this.klinikID = klinikID;
     }
 
     public String getTimeStart() {
-        return TimeStart;
+        return timeStart;
     }
 
     public void setTimeStart(String timeStart) {
-        TimeStart = timeStart;
+        this.timeStart = timeStart;
     }
 
     public String getTimeEnd() {
-        return TimeEnd;
+        return timeEnd;
     }
 
     public void setTimeEnd(String timeEnd) {
-        TimeEnd = timeEnd;
+        this.timeEnd = timeEnd;
     }
 
     public String getNotat() {
-        return Notat;
+        return notat;
     }
 
     public void setNotat(String notat) {
-        Notat = notat;
+        this.notat = notat;
     }
 }

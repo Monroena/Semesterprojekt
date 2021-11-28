@@ -18,8 +18,12 @@ window.onclick = function (event) {
 }
 
 /* Fetch kald som skal resultere i at xml bliver hentet*/
-function fetchfunction(apiurl) {
-    fetch(apiurl,{
+function fetchfunction(grp) {
+    let cpr = document.getElementById("cpr").value;
+    fetch("/IT3_Delopgave_2_war/data/import?" + new URLSearchParams({
+        grp : grp,
+        CPR : cpr
+    }),{
         headers: {
             "Authorization": localStorage.getItem("token")
         }
@@ -28,12 +32,12 @@ function fetchfunction(apiurl) {
 
 function displaydata(data) {
     let container = "";
-    for (let i = 0; i < data.aftaleliste.length; i++) {
-        let cpr = "CPR: " + data.aftaleliste[i].CPR;
-        let klinikid = "KlinikID: " + data.aftaleliste[i].KlinikID;
-        let id = "AftaleID: " + data.aftaleliste[i].ID;
-        let time = data.aftaleliste[i].TimeStart + " ----- " + data.aftaleliste[i].TimeEnd;
-        let note = data.aftaleliste[i].Notat;
+    for (let i = 0; i < data.aftaleListe.aftale.length; i++) {
+        let cpr = "CPR: " + data.aftaleListe.aftale[i].CPR;
+        let klinikid = "KlinikID: " + data.aftaleListe.aftale[i].klinikID;
+        let id = "AftaleID: " + data.aftaleListe.aftale[i].ID;
+        let time = data.aftaleListe.aftale[i].timeStart + " ----- " + data.aftaleListe.aftale[i].timeEnd;
+        let note = data.aftaleListe.aftale[i].notat;
 
         let tider = '<span class="tider">' + time + '</span><br>'
         let navne = '<span class="name">' + cpr + " --- " + klinikid + " --- " + id + '</span><br>';

@@ -30,7 +30,7 @@ public class AftaleController {
         }
     }
 
-    public model.AftaleListe cprSearch(String cpr) throws SQLException, OurException {
+    public AftaleListe cprSearch(String cpr) throws SQLException, OurException {
         if (cpr == null) {
             return SQL.getSqlOBJ().getAftalerListe();
         }
