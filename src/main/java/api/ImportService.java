@@ -33,7 +33,7 @@ public class ImportService {
                 System.out.println(cpr);
                 if (cpr.length()>5) {
                     System.out.println("imhere");
-                    jsonobj = ImportController.getimportControllerOBJ().getImportJSON("https://grp4.it3.diplomportal.dk/IT3_Delopgave_2_war/data/aftaler?CPR="+cpr);
+                    jsonobj = ImportController.getimportControllerOBJ().getImportJSON("https://grp4.it3.diplomportal.dk/IT3_Delopgave_2_war/data/aftaler?cpr="+cpr);
                 }
                 else{
                     jsonobj = ImportController.getimportControllerOBJ().getImportJSON("https://grp4.it3.diplomportal.dk/IT3_Delopgave_2_war/data/aftaler");
