@@ -19,8 +19,9 @@ window.onclick = function (event) {
 
 /* Fetch kald som skal resultere i at xml bliver hentet*/
 function fetchfunction(grp) {
+    document.getElementById("tekstfelt").innerHTML ="";
     let cpr = document.getElementById("cpr").value;
-    fetch("/IT3_Delopgave_2_war/data/import?" + new URLSearchParams({
+    fetch("/data/import?" + new URLSearchParams({
         grp : grp,
         CPR : cpr
     }),{

@@ -42,23 +42,19 @@ public class JWTHandler {
     }
     // Validering af token
     public static User validate(String authentication) {
-        System.out.println(authentication);
         if(authentication == null){
             throw new NotAuthorizedException("ingen header");
         }
         String[] tokenArray = authentication.split(" ");
         String token = tokenArray[tokenArray.length - 1];
 
-        System.out.println("token til at parse: " + token);
         try {
             Claims claims = Jwts.parser()
                     .setSigningKey(getKey())
                     .parseClaimsJws(token)
                     .getBody();
-            System.out.println("token succesfuldt parset");
             ObjectMapper mapper = new ObjectMapper();
             User user = mapper.convertValue(claims.get("user"), User.class);
-            System.out.println(user);
             return user;
         } catch (JwtException e){
             System.out.println(e.getClass() +":  "+ e.getMessage());

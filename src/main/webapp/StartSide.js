@@ -1,7 +1,7 @@
 function hentAftaleFecth(from, to) {
     let fra = from;
     let til = to;
-    fetch("/IT3_Delopgave_2_war/data/aftaler/aftalerSQL?" + new URLSearchParams({
+    fetch("/data/aftaler/aftalerSQL?" + new URLSearchParams({
         from: fra,
         to: til,
 
@@ -20,12 +20,12 @@ function udfyldskema(data) {
     let container = "";
     let note = "";
 
-    for (let i = 0; i < data.aftaleliste.length; i++) {
-        timestart = data.aftaleliste[i].TimeStart.substring(11, 16) + "\t-\t";
-        timeend = data.aftaleliste[i].TimeEnd.substring(11, 16)
-        klinikId = ("klinikId: " + data.aftaleliste[i].KlinikID);
-        cpr = "CPR: " + data.aftaleliste[i].CPR + "\t";
-        note = "Notat: " + data.aftaleliste[i].Notat;
+    for (let i = 0; i < data.aftaleListe.length; i++) {
+        timestart = data.aftaleListe[i].timeStart.substring(11, 16) + "\t-\t";
+        timeend = data.aftaleListe[i].timeEnd.substring(11, 16)
+        klinikId = ("klinikId: " + data.aftaleListe[i].klinikID);
+        cpr = "CPR: " + data.aftaleListe[i].CPR + "\t";
+        note = "Notat: " + data.aftaleListe[i].notat;
 
 
         let Tider = '<span class="autotider">' + timestart + timeend + '</span>';
@@ -130,7 +130,7 @@ function setdates(year, month, day) {
 
 //Pop-up journal
 function formfetch() {
-    fetch("/IT3_Delopgave_2_war/data/aftaler/aftalerSQL?" + new URLSearchParams({
+    fetch("/data/aftaler/aftalerSQL?" + new URLSearchParams({
         cpr: document.getElementById("cpr").value,
         //name: document.getElementById("navn").value,
         timestart: document.getElementById("timeStart").value,
@@ -220,7 +220,13 @@ function noWeekend() {
 
     if (day.getDay() === 6 || day.getDay() === 0) {
         alert('Weekends not allowed');
-        day.setDate(0)
+        datetime.value = "";
+        start.value = "";
+        end.value = "";
+        timefree.value = "";
+    }
+    if (day.getHours() >16 || day.getHours()<8) {
+        alert('Between 8-16');
         datetime.value = "";
         start.value = "";
         end.value = "";

@@ -144,7 +144,7 @@ public class SQL {
 
     public AftaleListe cprSearch(String cpr) throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
-        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM liste.db2aftaler WHERE CPR = ?;");
+        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM listedb2.aftaler WHERE CPR = ?;");
         AftaleListe aftaleListe = new AftaleListe();
         try {
             pp.setString(1, cpr);
@@ -165,7 +165,6 @@ public class SQL {
             e.printStackTrace();
         }
         SQL.getSqlOBJ().removeConnectionSQL();
-        System.out.println(aftaleListe.getAftaler());
         return aftaleListe;
     }
 }

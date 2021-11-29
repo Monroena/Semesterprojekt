@@ -23,7 +23,6 @@ public class ImportController {
         AftaleListe aftaleListe = new AftaleListe();
 
         JSONArray p = apiDAO.getApiDAOOBJ().getJsonOBJ(http).getJSONObject(liste).getJSONArray(listearray);
-        System.out.println(p.getJSONObject(0).toString());
 
         for (int i = 0; i < p.length(); i++) {
             aftaleListe.addAftaler(new Gson().fromJson(String.valueOf(p.getJSONObject(i)), Aftale.class));

@@ -1,12 +1,8 @@
 package dataAccesLayer;
 
-import com.google.gson.Gson;
+
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import controller.ImportController;
-import model.Aftale;
-import model.AftaleListe;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 
@@ -29,6 +25,7 @@ public class apiDAO {
         String s = null;
         try {
             s = Unirest.get(http).asString().getBody();
+
             return s;
         } catch (UnirestException e) {
             e.printStackTrace();

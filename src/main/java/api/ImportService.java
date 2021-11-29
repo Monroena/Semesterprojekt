@@ -1,6 +1,5 @@
 package api;
 
-import com.google.gson.Gson;
 import controller.ImportController;
 import org.json.JSONObject;
 
@@ -30,13 +29,11 @@ public class ImportService {
                 return jsonobj.toString();
             }
             case 4: {
-                System.out.println(cpr);
                 if (cpr.length()>5) {
-                    System.out.println("imhere");
-                    jsonobj = ImportController.getimportControllerOBJ().getImportJSON("https://grp4.it3.diplomportal.dk/IT3_Delopgave_2_war/data/aftaler?cpr="+cpr);
+                    jsonobj = ImportController.getimportControllerOBJ().getImportJSON(("https://grp4.it3.diplomportal.dk/data/aftaler?cpr="+cpr));
                 }
                 else{
-                    jsonobj = ImportController.getimportControllerOBJ().getImportJSON("https://grp4.it3.diplomportal.dk/IT3_Delopgave_2_war/data/aftaler");
+                    jsonobj = ImportController.getimportControllerOBJ().getImportJSON("https://grp4.it3.diplomportal.dk/data/aftaler");
                 }
                 return jsonobj.toString();
             }
