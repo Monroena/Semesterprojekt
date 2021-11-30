@@ -23,6 +23,8 @@ async function login() {
     //let loginform = document.getElementById("loginform");
     user = document.getElementById("username").value;
     pass = document.getElementById("password").value;
+    sessionStorage.user=user;
+    console.log(sessionStorage.user);
 
     //const formData = new FormData(loginform);
     //const object = Object.fromEntries(formData);

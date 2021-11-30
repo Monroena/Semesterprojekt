@@ -15,4 +15,5 @@ public class LoginService {
         LoginData loginData = new LoginData(user, pass);
         return LoginController.getLoginControllerOBJ().doLogin(loginData);
     }
+
 }
