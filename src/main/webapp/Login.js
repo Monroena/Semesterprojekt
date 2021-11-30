@@ -2,6 +2,20 @@
 const visibilityListen = document.getElementById('visibilityListen')
 visibilityListen.addEventListener('click', togglevisibiliy) //brug functionen hvis man trykker på iconet
 
+
+
+var passlabel = document.getElementById('password')
+var btn = document.getElementById('btn')
+
+passlabel.addEventListener('keyup', (e) =>
+{
+    if(e.keyCode===13){
+        btn.click();
+    }
+})
+
+
+
 function togglevisibiliy() {
     const passwordInput = document.getElementById("password")
     const icon = document.getElementById("icon")
@@ -24,7 +38,6 @@ async function login() {
     user = document.getElementById("username").value;
     pass = document.getElementById("password").value;
     sessionStorage.user=user;
-    console.log(sessionStorage.user);
 
     //const formData = new FormData(loginform);
     //const object = Object.fromEntries(formData);

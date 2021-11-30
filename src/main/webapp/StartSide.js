@@ -1,5 +1,7 @@
 let user = localStorage.getItem("token");
+
 document.getElementById("brugernavn").innerText=user;
+
 if (!user){window.location.href="LoginSide.html"}
 
 function hentAftaleFecth(from, to) {
@@ -269,7 +271,7 @@ function refresh() {
     hentAftaleFecth(fromfrom, tiltil)
 }
 
-document.getElementById("brugernavn").innerText = sessionStorage.getItem("username");
+document.getElementById("brugernavn").innerText = sessionStorage.getItem("user");
 
 function logud() {
     sessionStorage.setItem("username", "");

@@ -51,7 +51,7 @@ function displaydata(data) {
             container += navne + tider + notat;
             console.log(container);
         }
-    }catch{
+    }catch(error){
         /* Hvis længden ikke kan findes er der kun 1 element */
         let cpr = "CPR: " + data.aftaleListe.aftale.CPR;
         let klinikid = "KlinikID: " + data.aftaleListe.aftale.klinikID;
@@ -62,6 +62,8 @@ function displaydata(data) {
         let tider = '<span class="tider">' + time + '</span><br>'
         let navne = '<span class="name">' + cpr + " --- " + klinikid + " --- " + id + '</span><br>';
         let notat = '<span class="note">' + note + '</span><hr>';
+        console.log("test: " + data.aftaleListe);
+        console.log(navne + tider + notat);
 
         container += navne + tider + notat;
         console.log(container);
