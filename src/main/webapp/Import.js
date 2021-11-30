@@ -36,12 +36,28 @@ function fetchfunction(grp) {
 
 function displaydata(data) {
     let container = "";
-    for (let i = 0; i < data.aftaleListe.aftale.length; i++) {
-        let cpr = "CPR: " + data.aftaleListe.aftale[i].CPR;
-        let klinikid = "KlinikID: " + data.aftaleListe.aftale[i].klinikID;
-        let id = "AftaleID: " + data.aftaleListe.aftale[i].ID;
-        let time = data.aftaleListe.aftale[i].timeStart + " ----- " + data.aftaleListe.aftale[i].timeEnd;
-        let note = data.aftaleListe.aftale[i].notat;
+    try {
+        for (let i = 0; i < data.aftaleListe.aftale.length; i++) {
+            let cpr = "CPR: " + data.aftaleListe.aftale[i].CPR;
+            let klinikid = "KlinikID: " + data.aftaleListe.aftale[i].klinikID;
+            let id = "AftaleID: " + data.aftaleListe.aftale[i].ID;
+            let time = data.aftaleListe.aftale[i].timeStart + " ----- " + data.aftaleListe.aftale[i].timeEnd;
+            let note = data.aftaleListe.aftale[i].notat;
+
+            let tider = '<span class="tider">' + time + '</span><br>'
+            let navne = '<span class="name">' + cpr + " --- " + klinikid + " --- " + id + '</span><br>';
+            let notat = '<span class="note">' + note + '</span><hr>';
+
+            container += navne + tider + notat;
+            console.log(container);
+        }
+    }catch{
+        /* Hvis længden ikke kan findes er der kun 1 element */
+        let cpr = "CPR: " + data.aftaleListe.aftale.CPR;
+        let klinikid = "KlinikID: " + data.aftaleListe.aftale.klinikID;
+        let id = "AftaleID: " + data.aftaleListe.aftale.ID;
+        let time = data.aftaleListe.aftale.timeStart + " ----- " + data.aftaleListe.aftale.timeEnd;
+        let note = data.aftaleListe.aftale.notat;
 
         let tider = '<span class="tider">' + time + '</span><br>'
         let navne = '<span class="name">' + cpr + " --- " + klinikid + " --- " + id + '</span><br>';
