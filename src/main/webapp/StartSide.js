@@ -13,7 +13,6 @@ function hentAftaleFecth(from, to) {
         headers: {
             "Authorization": localStorage.getItem("token")
         }
-
     }).then(resp => resp.json()).then(data => udfyldskema(data));
 }
 
