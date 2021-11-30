@@ -1,5 +1,5 @@
-
-if (!user){window.location.href="LoginSide.html"}
+let tok = localStorage.getItem("token");
+if (!tok){window.location.href="LoginSide.html"}
 
 function hentAftaleFecth(from, to) {
     let fra = from;
