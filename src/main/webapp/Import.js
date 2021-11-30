@@ -35,18 +35,9 @@ function fetchfunction(grp) {
 }
 
 function displaydata(data) {
-    console.log("data: " + data);
-    console.log("aftaleliste: " + data.aftaleListe);
-    console.log("aftale: " + data.aftaleListe.aftlae);
-    console.log("aftale0: " + data.aftaleListe.aftale[0]);
-    console.log("aftale.cpr: " + data.aftaleListe.aftale.CPR);
-
     if(1 < data.aftaleListe.aftale.length) {
         createList(data);
-        console.log("listen blev kørt");
     }else{
-        console.log("kun en eneklt aftale");
-        /* Hvis længden ikke kan findes er der kun 1 element */
         createSingle(data);
     }
 }
@@ -61,7 +52,7 @@ function createSingle(data){
 
     let tider = '<span class="tider">' + time + '</span><br>'
     let navne = '<span class="name">' + cpr + " --- " + klinikid + " --- " + id + '</span><br>';
-    let notat = '<span class="note">' + note + '</span><hr>';
+    let notat = '<span class="note">' + note + '</span><br>';
 
     container += navne + tider + notat;
     console.log(container);
