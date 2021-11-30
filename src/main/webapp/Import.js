@@ -1,5 +1,5 @@
-user = localStorage.getItem("token");
-if (!user){window.location.href="LoginSide.html"}
+
+if (!localStorage.getItem("token")){window.location.href="LoginSide.html"}
 
 /*viser dropdown menu*/
 function myFunction() {
