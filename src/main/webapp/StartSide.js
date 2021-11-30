@@ -61,13 +61,16 @@ const months = [
 ];
 let fromfrom = "";
 let tiltil = "";
+let myyear = new Date(Date.getYear());
 
 function makecalender(date) {
     let mymonth = months[date.getMonth()];
+
+
     const dates = document.querySelector(".dates");
     const lastdates = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
-    document.getElementById("actualmonth").innerText = mymonth;
+    document.getElementById("actualmonth").innerText = mymonth + myyear;
 
     const firstdayindex = date.getDay() - 1;
 
@@ -101,12 +104,16 @@ makecalender(date);
 
 function nextdate() {
     date.setMonth(date.getMonth() + 1);
+
     makecalender(date);
 }
 
 function prevdate() {
     date.setMonth(date.getMonth() - 1);
+    if(mymonth=months[11])
+    {myyear=date.getYear()-1}
     makecalender(date);
+
 }
 
 let i = 0;
