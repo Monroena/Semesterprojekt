@@ -17,9 +17,16 @@ public class AuthFilter implements ContainerRequestFilter {
         //Hvis det ikke er login siden udføre vi kontrol af token
         if (!"login".equals(containerRequestContext.getUriInfo().getPath()) && !"aftaler".equals(containerRequestContext.getUriInfo().getPath())) {
             if (containerRequestContext.getHeaderString("Authorization") == null) {
-                throw new WebApplicationException("fejl", 401);
+                throw new WebApplicationException("Ingen Token", 401);
             }
-            User user = JWTHandler.validate(containerRequestContext.getHeaderString("Authorization"));
+            try{
+                User user = JWTHandler.validate(containerRequestContext.getHeaderString("Authorization"));
+            }catch (Exception e){
+                throw new WebApplicationException("Invalid Token", 401);
+            }
+
+
         }
+
     }
 }

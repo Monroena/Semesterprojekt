@@ -4,6 +4,14 @@ function loginNavn(){
 }
 
 
+window.onload = function(){
+    let user = localStorage.getItem("token");
+    document.getElementById("brugernavn").innerText=user;
+    if (!user){
+        window.location.href="LoginSide.html"
+    }
+}
+
 function hentAftaleFecth(from, to) {
     let fra = from;
     let til = to;
@@ -15,7 +23,8 @@ function hentAftaleFecth(from, to) {
         headers: {
             "Authorization": localStorage.getItem("token")
         }
-    }).then(resp => resp.json()).then(data => udfyldskema(data))
+
+    }).then(resp => resp.json()).then(data => udfyldskema(data));
 }
 
 function udfyldskema(data) {
@@ -154,6 +163,9 @@ function formfetch() {
             throw Error(await resp.text());
         }
     }).then(text => alert(text)).catch(Error => alert(Error));
+
+
+
 }
 
 function openForm() {
