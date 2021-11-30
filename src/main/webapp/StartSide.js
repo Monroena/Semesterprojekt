@@ -67,7 +67,7 @@ function makecalender(date) {
     const dates = document.querySelector(".dates");
     const lastdates = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
-    document.getElementById("actualmonth").innerText = mymonth + new Date(date.getUTCFullYear());
+    document.getElementById("actualmonth").innerText = mymonth +"    " +date.getFullYear();
 
     const firstdayindex = date.getDay() - 1;
 
