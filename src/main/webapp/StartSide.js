@@ -1,6 +1,3 @@
-let user = localStorage.getItem("token");
-
-document.getElementById("brugernavn").innerText=user;
 
 if (!user){window.location.href="LoginSide.html"}
 
@@ -61,7 +58,7 @@ const months = [
 ];
 let fromfrom = "";
 let tiltil = "";
-let myyear = new Date(Date.getYear());
+
 
 function makecalender(date) {
     let mymonth = months[date.getMonth()];
@@ -70,7 +67,7 @@ function makecalender(date) {
     const dates = document.querySelector(".dates");
     const lastdates = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
-    document.getElementById("actualmonth").innerText = mymonth + myyear;
+    document.getElementById("actualmonth").innerText = mymonth;
 
     const firstdayindex = date.getDay() - 1;
 
@@ -104,14 +101,11 @@ makecalender(date);
 
 function nextdate() {
     date.setMonth(date.getMonth() + 1);
-
     makecalender(date);
 }
 
 function prevdate() {
     date.setMonth(date.getMonth() - 1);
-    if(mymonth=months[11])
-    {myyear=date.getYear()-1}
     makecalender(date);
 
 }
