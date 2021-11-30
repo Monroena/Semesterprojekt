@@ -35,38 +35,54 @@ function fetchfunction(grp) {
 }
 
 function displaydata(data) {
-    let container = "";
-    try {
-        for (let i = 0; i < data.aftaleListe.aftale.length; i++) {
-            let cpr = "CPR: " + data.aftaleListe.aftale[i].CPR;
-            let klinikid = "KlinikID: " + data.aftaleListe.aftale[i].klinikID;
-            let id = "AftaleID: " + data.aftaleListe.aftale[i].ID;
-            let time = data.aftaleListe.aftale[i].timeStart + " ----- " + data.aftaleListe.aftale[i].timeEnd;
-            let note = data.aftaleListe.aftale[i].notat;
+    console.log("data: " + data);
+    console.log("aftaleliste: " + data.aftaleListe);
+    console.log("aftale: " + data.aftaleListe.aftlae);
+    console.log("aftale0: " + data.aftaleListe.aftale[0]);
+    console.log("aftale.cpr: " + data.aftaleListe.aftale.CPR);
 
-            let tider = '<span class="tider">' + time + '</span><br>'
-            let navne = '<span class="name">' + cpr + " --- " + klinikid + " --- " + id + '</span><br>';
-            let notat = '<span class="note">' + note + '</span><hr>';
-
-            container += navne + tider + notat;
-            console.log(container);
-        }
-    }catch(error){
+    if(1 < data.aftaleListe.aftale.length) {
+        createList(data);
+        console.log("listen blev kørt");
+    }else{
+        console.log("kun en eneklt aftale");
         /* Hvis længden ikke kan findes er der kun 1 element */
-        let cpr = "CPR: " + data.aftaleListe.aftale.CPR;
-        let klinikid = "KlinikID: " + data.aftaleListe.aftale.klinikID;
-        let id = "AftaleID: " + data.aftaleListe.aftale.ID;
-        let time = data.aftaleListe.aftale.timeStart + " ----- " + data.aftaleListe.aftale.timeEnd;
-        let note = data.aftaleListe.aftale.notat;
+        createSingle(data);
+    }
+}
+
+function createSingle(data){
+    let container = "";
+    let cpr = "CPR: " + data.aftaleListe.aftale.CPR;
+    let klinikid = "KlinikID: " + data.aftaleListe.aftale.klinikID;
+    let id = "AftaleID: " + data.aftaleListe.aftale.ID;
+    let time = data.aftaleListe.aftale.timeStart + " ----- " + data.aftaleListe.aftale.timeEnd;
+    let note = data.aftaleListe.aftale.notat;
+
+    let tider = '<span class="tider">' + time + '</span><br>'
+    let navne = '<span class="name">' + cpr + " --- " + klinikid + " --- " + id + '</span><br>';
+    let notat = '<span class="note">' + note + '</span><hr>';
+
+    container += navne + tider + notat;
+    console.log(container);
+    document.getElementById("tekstfelt").innerHTML = container;
+}
+
+function createList(data){
+    let container = "";
+    for (let i = 0; i < data.aftaleListe.aftale.length; i++) {
+        let cpr = "CPR: " + data.aftaleListe.aftale[i].CPR;
+        let klinikid = "KlinikID: " + data.aftaleListe.aftale[i].klinikID;
+        let id = "AftaleID: " + data.aftaleListe.aftale[i].ID;
+        let time = data.aftaleListe.aftale[i].timeStart + " ----- " + data.aftaleListe.aftale[i].timeEnd;
+        let note = data.aftaleListe.aftale[i].notat;
 
         let tider = '<span class="tider">' + time + '</span><br>'
         let navne = '<span class="name">' + cpr + " --- " + klinikid + " --- " + id + '</span><br>';
         let notat = '<span class="note">' + note + '</span><hr>';
-        console.log("test: " + data.aftaleListe);
-        console.log(navne + tider + notat);
 
         container += navne + tider + notat;
         console.log(container);
-    }
+        }
     document.getElementById("tekstfelt").innerHTML = container;
 }
