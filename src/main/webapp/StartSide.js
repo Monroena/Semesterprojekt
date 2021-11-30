@@ -1,16 +1,6 @@
-
-function loginNavn(){
-    document.getElementById("brugernavn").innerText = sessionStorage.user;
-}
-
-
-window.onload = function(){
-    let user = localStorage.getItem("token");
-    document.getElementById("brugernavn").innerText=user;
-    if (!user){
-        window.location.href="LoginSide.html"
-    }
-}
+let user = localStorage.getItem("token");
+document.getElementById("brugernavn").innerText=user;
+if (!user){window.location.href="LoginSide.html"}
 
 function hentAftaleFecth(from, to) {
     let fra = from;

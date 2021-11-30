@@ -1,9 +1,6 @@
-window.onload = function(){
-    user = localStorage.getItem("token");
-    if (!user){
-        window.location.href="LoginSide.html"
-    }
-}
+user = localStorage.getItem("token");
+if (!user){window.location.href="LoginSide.html"}
+
 /*viser dropdown menu*/
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
