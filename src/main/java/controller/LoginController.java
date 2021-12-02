@@ -39,7 +39,6 @@ public class LoginController {
         throw new WebApplicationException("fejl", 401);
     }
 
-
     public boolean loginVal(String brugerliste, String pass) {
         if (brugerliste.length() > 1) {
             String[] opdelt = brugerliste.split("\\|");
