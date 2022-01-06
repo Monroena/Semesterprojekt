@@ -1,6 +1,5 @@
 package controller;
 
-
 import dataAccesLayer.SQL;
 import exceptions.OurException;
 import model.Aftale;
@@ -65,9 +64,5 @@ public class AftaleController {
             ex.setMessage("CPR skal være 10 cifre, yyyymmddxxxx");
             throw ex;
         }
-
-
     }
-
-
 }

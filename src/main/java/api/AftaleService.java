@@ -22,7 +22,7 @@ public class AftaleService {
 
     @Path("aftalerSQL")
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({MediaType.TEXT_PLAIN})
     public String makepatientSQL(@QueryParam("cpr") String cpr, @QueryParam("timestart")
             String timestart, @QueryParam("timeend") String timeend, @QueryParam("note") String notat) throws SQLException, OurException {
         return AftaleController.getAftaleControllerOBJ().createAftale(cpr, timestart, timeend, notat);
@@ -30,6 +30,7 @@ public class AftaleService {
 
     @Path("aftalerSQL")
     @GET
+    @Produces({MediaType.TEXT_PLAIN})
     public String selectFromTime(@QueryParam("from") String from, @QueryParam("to") String to) throws SQLException {
         return new Gson().toJson(SQL.getSqlOBJ().getAftaleListeDateTime(from, to));
     }
