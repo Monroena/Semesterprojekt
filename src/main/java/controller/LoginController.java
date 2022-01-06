@@ -63,6 +63,11 @@ public class LoginController {
         return pass;
     }
 
+    /*public static void main(String[] args) {
+        int salt = getSalt();
+        //System.out.println(salt);
+        System.out.println(generateHash("1234",salt));
+    }*/
     public static int getSalt() {
         byte[] salt = new byte[20];
         SecureRandom sr = new SecureRandom();

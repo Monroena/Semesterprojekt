@@ -29,7 +29,7 @@ function fetchfunction(grp) {
         CPR : cpr
     }),{
         headers: {
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     }).then(resp => resp.json()).then(data => displaydata(data));
 }
@@ -55,7 +55,7 @@ function createSingle(data){
     let notat = '<span class="note">' + note + '</span><br>';
 
     container += navne + tider + notat;
-    console.log(container);
+    //console.log(container);
     document.getElementById("tekstfelt").innerHTML = container;
 }
 
@@ -73,7 +73,7 @@ function createList(data){
         let notat = '<span class="note">' + note + '</span><hr>';
 
         container += navne + tider + notat;
-        console.log(container);
+        //console.log(container);
         }
     document.getElementById("tekstfelt").innerHTML = container;
 }

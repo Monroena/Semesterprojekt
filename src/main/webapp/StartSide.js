@@ -10,7 +10,7 @@ function hentAftaleFecth(from, to) {
 
     }), {
         headers: {
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     }).then(resp => resp.json()).then(data => udfyldskema(data));
 }
@@ -146,7 +146,7 @@ function formfetch() {
     }), {
         method: "POST",
         headers: {
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     }).then(async resp => {
         if (resp.status >= 200 && resp.status <= 299) {
